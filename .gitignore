@@ -1,0 +1,11 @@
+*.swp
+*.bak
+*.vcd
+*.fst
+*.gtkw
+
+.mypy_cache
+__pycache__
+
+# SymbiYosys work dirs
+sby/*/
