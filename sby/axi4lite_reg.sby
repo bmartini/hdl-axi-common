@@ -1,0 +1,12 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal -DAXI4LITE_REG axi4lite_reg.sv
+prep -top axi4lite_reg
+
+[files]
+../hdl/axi4lite_reg.sv
