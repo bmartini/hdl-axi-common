@@ -1,0 +1,12 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal -DAXIS_SKID_BUFFER axis_skid_buffer.sv
+prep -top axis_skid_buffer
+
+[files]
+../hdl/axis_skid_buffer.sv
