@@ -1,0 +1,21 @@
+[tasks]
+b2s  s_8 m_4
+pass s_4 m_4
+s2b  s_4 m_8
+
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal -DAXIS_GEARBOX axis_gearbox.sv
+s_4: chparam -set S_DWIDTH 4 axis_gearbox
+s_8: chparam -set S_DWIDTH 8 axis_gearbox
+m_4: chparam -set M_DWIDTH 4 axis_gearbox
+m_8: chparam -set M_DWIDTH 8 axis_gearbox
+prep -top axis_gearbox
+
+[files]
+../hdl/axis_gearbox.sv
