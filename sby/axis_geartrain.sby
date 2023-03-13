@@ -1,0 +1,24 @@
+[tasks]
+b2s  s_8 m_4
+pass s_4 m_4
+s2b  s_4 m_8
+
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal -DAXIS_GEARTRAIN axis_geartrain.sv
+read -formal axis_gearbox.sv
+
+s_4: chparam -set S_DWIDTH 4 axis_geartrain
+s_8: chparam -set S_DWIDTH 8 axis_geartrain
+m_4: chparam -set M_DWIDTH 4 axis_geartrain
+m_8: chparam -set M_DWIDTH 8 axis_geartrain
+prep -top axis_geartrain
+
+[files]
+../hdl/axis_gearbox.sv
+../hdl/axis_geartrain.sv
