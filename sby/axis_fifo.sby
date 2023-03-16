@@ -1,0 +1,12 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal -DAXIS_FIFO axis_fifo.sv
+prep -top axis_fifo
+
+[files]
+../hdl/axis_fifo.sv
