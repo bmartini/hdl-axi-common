@@ -1,0 +1,12 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal -DAXIS_ARBITER axis_arbiter.sv
+prep -top axis_arbiter
+
+[files]
+../hdl/axis_arbiter.sv
