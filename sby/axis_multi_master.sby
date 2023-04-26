@@ -1,0 +1,21 @@
+[tasks]
+greedy
+
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal -DAXIS_MULTI_MASTER axis_multi_master.sv
+read -formal axis_skid_buffer.sv
+
+greedy: chparam -set GREEDY 1 axis_multi_master
+
+chparam -set PORT_NB 2 axis_multi_master
+prep -top axis_multi_master
+
+[files]
+../hdl/axis_multi_master.sv
+../hdl/axis_skid_buffer.sv
