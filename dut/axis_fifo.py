@@ -101,13 +101,22 @@ def test_intermittent_send_stream(context):
     up_stream.send(send)
 
     while len(up_stream.queue[0]) != 0:
+        io = vpw.tick()
+        m_tvalid = bool(io["m_tvalid"])
+        m_tready = bool(io["m_tready"])
+
+        if (not m_tready) or (m_tvalid and m_tready):
+            dn_stream.ready(bool(random.getrandbits(1)))
+
         up_stream.pause(bool(random.getrandbits(1)))
-        dn_stream.ready(bool(random.getrandbits(1)))
-        vpw.tick()
 
     while len(dn_stream.queue[0]) == 0:
-        dn_stream.ready(bool(random.getrandbits(1)))
-        vpw.tick()
+        io = vpw.tick()
+        m_tvalid = bool(io["m_tvalid"])
+        m_tready = bool(io["m_tready"])
+
+        if (not m_tready) or (m_tvalid and m_tready):
+            dn_stream.ready(bool(random.getrandbits(1)))
 
     vpw.idle(10)
 

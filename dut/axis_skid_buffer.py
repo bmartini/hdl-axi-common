@@ -96,8 +96,12 @@ def test_simple_stream_interrupted(context):
 
     # randomly turn down stream interface on and off
     while len(dn_stream.queue[0]) == 0:
-        dn_stream.ready(bool(random.getrandbits(1)))
-        vpw.tick()
+        io = vpw.tick()
+        m_tvalid = bool(io["m_tvalid"])
+        m_tready = bool(io["m_tready"])
+
+        if (not m_tready) or (m_tvalid and m_tready):
+            dn_stream.ready(bool(random.getrandbits(1)))
 
     vpw.idle(10)
 
